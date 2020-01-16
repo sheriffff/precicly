@@ -1,9 +1,15 @@
 # auth files
 madrid/auth.py
 
+# access token
+madrid/access_token.txt
+
+#temp files
+madrid/temp.py
+
 # Jupyter Notebook
 .ipynb_checkpoints
-notebooks
+notebooks/*
 
 # PyCharm stuff
 .idea/*
