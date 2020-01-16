@@ -28,7 +28,7 @@ with open("barcelona/test_scrape.csv", mode="a+") as f:
     for i in range(17280):
         print(i)
         # Get json response
-        bicycle_dict = get_response(url_bcn)['stations']
+        bicycle_dict = get_response(url_bcn).get('stations')
 
         # Iterate over each row and append to csv file
         for i in bicycle_dict:
