@@ -9,12 +9,13 @@ with open("barcelona/test_scrape.csv", mode="w+") as f:
     f.write('time;id;type;latitude;longitude;streetName;streetNumber;altitude;slots;bikes;nearbyStations;status')
     f.write("\n")
 
+
 # Define function to get json response
 def get_response(url):
     resp = urllib.request.urlopen(url)
     data = resp.read()
     json_dt = json.loads(data)
-    return(json_dt)
+    return json_dt
 
 
 url_bcn = "http://wservice.viabicing.cat/v2/stations"
@@ -31,11 +32,11 @@ with open("barcelona/test_scrape.csv", mode="a+") as f:
         bicycle_dict = get_response(url_bcn)['stations']
 
         # Iterate over each row and append to csv file
-        for i in bicycle_dict:
-            i_vals = delim.join(i.values())
+        for j in bicycle_dict:
+            j_vals = delim.join(j.values())
             # To know the specific second that we requested the data
             timestamp = str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-            f.write(timestamp + delim + i_vals)
+            f.write(timestamp + delim + j_vals)
             f.write("\n")
 
         time.sleep(5)

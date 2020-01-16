@@ -1,9 +1,9 @@
 # auth files
-auth_bicimad.py
+madrid/auth.py
 
 # Jupyter Notebook
 .ipynb_checkpoints
-madrid/notebooks
+notebooks
 
 # PyCharm stuff
 .idea/*
