@@ -1,10 +1,8 @@
 # auth files
-madrid/auth.py
-
-# access token
+madrid/auth_credentials.py
 madrid/access_token.txt
 
-#temp files
+# temp files
 madrid/temp.py
 
 # Jupyter Notebook
