@@ -90,7 +90,8 @@ class BiciMad:
         """
         Calls API to logout
         """
-        self._get(url=self.url_logout, headers={'accessToken': self.access_token})
+        self._get(url=self.url_logout,
+                  headers={'accessToken': self.access_token})
 
     @shout
     def _is_access_token_alive(self):
@@ -100,7 +101,8 @@ class BiciMad:
         if self.access_token is None:
             return False
 
-        response_json = self._get(url=self.url_who_am_i, headers={'accessToken': self.access_token})
+        response_json = self._get(url=self.url_who_am_i,
+                                  headers={'accessToken': self.access_token})
 
         if response_json.get('code') != '02':
             return False
@@ -119,7 +121,8 @@ class BiciMad:
         """
         Calls API and gets all stations' status
         """
-        response_json = self._get(url=self.url_get_all_stations_info, headers={'accessToken': self.access_token})
+        response_json = self._get(url=self.url_get_all_stations_info,
+                                  headers={'accessToken': self.access_token})
 
         if response_json.get('code') != '00':
             print('Invalid token... lets get a new one')
