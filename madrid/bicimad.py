@@ -1,5 +1,4 @@
 import requests
-import pandas as pd
 
 from madrid.auth_credentials import auth_bicimad
 
@@ -115,7 +114,7 @@ class BiciMad:
         open('access_token.txt', 'w+').write(self.access_token)
 
     @shout
-    def _get_stations_raw_info(self):
+    def get_stations_info(self):
         """
         Calls API and gets all stations' status
         """
@@ -125,20 +124,16 @@ class BiciMad:
             print('Invalid token... lets get a new one')
             self._get_access_token()
 
-            return self._get_stations_raw_info()
+            return self.get_stations_info()
 
-        n_stations = int(response_json.get('description')[:3])
-        datetime = response_json.get('datetime')
+        datetime = response_json.get('datetime')[:-7]
         data = response_json.get('data')
+        # lets create a state to compare consecutive queries, because sometimes nothing changes
+        state = hash(str(data))
 
-        return n_stations, datetime, data
+        for station in data:
+            station['datetime'] = datetime
+            station['lon'], station['lat'] = station.get('geometry').get('coordinates')
+            del station['geometry']
 
-    @shout
-    def get_stations_dataframe(self):
-        n_stations, datetime, data = self._get_stations_raw_info()
-
-        df = pd.DataFrame(data)[self.stations_keys]
-
-        df['datetime'] = pd.to_datetime(datetime)
-
-        return df
+        return data, state
