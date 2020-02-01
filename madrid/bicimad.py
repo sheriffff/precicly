@@ -1,5 +1,4 @@
 import requests
-
 from madrid.auth_credentials import auth_bicimad
 
 
@@ -120,6 +119,7 @@ class BiciMad:
         """
         Calls API and gets all stations' status
         """
+        print("Contacting the BiciMad API")
         response_json = self._get(url=self.url_get_all_stations_info,
                                   headers={'accessToken': self.access_token})
 
@@ -129,9 +129,12 @@ class BiciMad:
 
             return self.get_stations_info()
 
+        print("Data successfully obtained")
+
         datetime = response_json.get('datetime')[:-7]
         data = response_json.get('data')
-        # lets create a state to compare consecutive queries, because sometimes nothing changes
+        # lets create a state to compare consecutive queries, because
+        # sometimes nothing changes
         state = hash(str(data))
 
         for station in data:
