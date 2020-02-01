@@ -1,9 +1,15 @@
 # auth files
-auth_bicimad.py
+madrid/auth_credentials.py
+madrid/access_token.txt
+# In case we run the sript from the root by mistake
+access_token.txt
+
+# temp files
+madrid/temp.py
 
 # Jupyter Notebook
 .ipynb_checkpoints
-madrid/notebooks
+notebooks/*
 
 # PyCharm stuff
 .idea/*
@@ -134,3 +140,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+barcelona/test_scrape.csv
