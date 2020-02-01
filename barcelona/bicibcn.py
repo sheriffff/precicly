@@ -15,11 +15,13 @@ def shout(func):
 class BiciBcn():
     """
     Documentation for BiciBcn:
-    Class in charge of connecting to Bicing Barcelona API and querying
-    information.
+    Class in charge of connecting to Bicing Barcelona API and Weather API.
     """
 
     url_get_all_stations_info = "http://wservice.viabicing.cat/v2/stations"
+
+    # This JSON contains all stations with id, location, etc..
+    # Can be downloaded from http://bulk.openweathermap.org/sample/
     available_cities_weather = "../city_list.json"
 
     # Barcelona square defined at http://bboxfinder.com/
