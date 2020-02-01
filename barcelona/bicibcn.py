@@ -58,10 +58,7 @@ class BiciBcn():
         print("Contacting the Bicing API")
         data_json = self._get(self.url_get_all_stations_info).get("stations")
         print("Data successfully obtained")
-
-        data_df = pd.DataFrame(data_json)
-
-        return data_df
+        return data_json
 
     @staticmethod
     def _within_square(square: list, point: list) -> bool:
@@ -173,7 +170,7 @@ class BiciBcn():
         return weather_dt
 
     @shout
-    def grab_weather(self) -> pd.DataFrame:
+    def get_weather(self) -> pd.DataFrame:
         """
         Using the available cities in Barcelona, request weather data for all
         stations and transform them into a data frame.
@@ -200,4 +197,4 @@ class BiciBcn():
 # For testing
 bicing_bcn = BiciBcn()
 bicing_bcn.get_stations()
-bicing_bcn.grab_weather()
+bicing_bcn.get_weather()
