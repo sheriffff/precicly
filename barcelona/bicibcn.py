@@ -78,7 +78,7 @@ class BiciBcn():
         return within
 
     @shout
-    def _grab_cities(self) -> list:
+    def get_weather_stations(self) -> list:
         """
         Reads the available weather stations from the JSON of the weather API
         and extracts the stations that are within the square defined
@@ -172,14 +172,14 @@ class BiciBcn():
         return weather_dt
 
     @shout
-    def get_weather(self) -> pd.DataFrame:
+    def get_weather_details(self) -> pd.DataFrame:
         """
         Using the available cities in Barcelona, request weather data for all
         stations and transform them into a data frame.
         """
 
         print("Grabbing available weather stations")
-        bcn_cities = self._grab_cities()
+        bcn_cities = self.get_weather_stations()
         code_str = ",".join([str(i.get("id")) for i in bcn_cities])
         weather_url = 'http://api.openweathermap.org/data/2.5/group?'\
             f'id={code_str}&units=metric&appid={self.api_key}'
@@ -191,12 +191,13 @@ class BiciBcn():
         print("Transforming weather data")
         cleaned_weather = [self._wrangle_weather(i) for i in weather_dict]
         weather_df = pd.concat(cleaned_weather, axis=0, sort=False)
-        print("Transforming successfully transformed")
+        print("Data successfully transformed")
 
         return weather_df
 
 
 # For testing
 bicing_bcn = BiciBcn()
-bicing_bcn.get_stations()
-bicing_bcn.get_weather()
+stations_json = bicing_bcn.get_stations()
+w_station_json = bicing_bcn.get_weather_stations()
+w_details_df = bicing_bcn.get_weather_details()
